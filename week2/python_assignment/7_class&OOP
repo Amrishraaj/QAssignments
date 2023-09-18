@@ -1,0 +1,172 @@
+class Country:
+    AVG_POPULATION = 1000000  # Default value given
+
+    def __init__(self, country_name, country_code):
+        if not isinstance(country_name, str) or not isinstance(country_code, str):
+            raise ValueError("Both country_name and country_code must be strings")
+        if len(country_code) != 3:
+            raise ValueError("Country code must be exactly 3 letters long")
+        
+        self._country_name = country_name
+        self._country_code = country_code
+
+    def country_short_form(self):
+        if len(self._country_name) < 2:
+            raise ValueError("Country name must have at least 2 characters")
+        return self._country_name[:2].upper()
+
+    @classmethod
+    def is_densely_populated(cls, population):
+        if not isinstance(population, int) or population < 0:
+            raise ValueError("Population must be a non-negative integer")
+        return (population > cls.AVG_POPULATION)
+
+    @staticmethod
+    def world_avg_population(populations):
+        if not isinstance(populations, list):
+            raise ValueError("Input must be a list of population numbers")
+        valid_populations = [p for p in populations if isinstance(p, (int, float)) and p >= 0]
+        if not valid_populations:
+            raise ValueError("No valid population values found in the list")
+        return sum(valid_populations) / len(valid_populations)
+
+    @property
+    def formatted_country_name(self):
+        return f"{self._country_name} ({self._country_code})"
+
+    @property
+    def country_name(self):
+        return self._country_name
+    
+    @property
+    def country_code(self):
+        return self._country_code
+
+
+    @country_name.setter
+    def country_name(self, new_name):
+        if not isinstance(new_name, str):
+            raise ValueError("Country name must be a string")
+        self._country_name = new_name
+
+
+    @country_code.setter
+    def country_code(self, new_code):
+        if not isinstance(new_code, str) or len(new_code) != 3:
+            raise ValueError("Country code must be a 3-letter string")
+        self._country_code = new_code
+
+    @country_code.deleter
+    def country_code(self):
+        raise AttributeError("Cannot delete country code")
+    
+    @country_name.deleter
+    def country_name(self):
+        raise AttributeError("Cannot delete country name")
+
+try:
+    print("**output of first question**\n")
+    country = Country("India", "IND")
+    print(country.formatted_country_name)  
+
+    country.country_name = "USA"
+    print(country.formatted_country_name)  
+
+    country.country_code = "USA"  
+    print(country.formatted_country_name)
+
+    del country.country_name
+
+    
+except ValueError and AttributeError as e:
+     print(f"Error: {e}")
+
+
+#--------------------------------------------------
+
+
+class Shapes:
+    def __init__(self, name, sides):
+        self.name = name
+        self.sides = sides
+
+    
+    def display_info(self):
+        return f"Shape: {self.name}, Sides: {self.sides}"
+
+
+class Triangle(Shapes):
+    def __init__(self, base, height):
+        super().__init__("3-sided_shape", 3)
+        self.name="Triangle"
+        self.base = base
+        self.height = height
+
+    def area(self):
+        return 0.5 * self.base * self.height
+
+    def display_info(self):
+        return f"{super().display_info()}, Base: {self.base}, Height: {self.height}"
+
+
+class Quadrilateral(Shapes):
+    def __init__(self, length, width):
+        super().__init__("4-sided_shape", 4)
+        self.name="Quadrilateral"
+        self.length = length
+        self.width = width
+
+    def area(self):
+        return self.length * self.width
+
+    def display_info(self):
+        return f"{super().display_info()}, Length: {self.length}, Width: {self.width}"
+
+
+class EquilateralTriangle(Triangle):
+    def __init__(self, side_length):
+        super().__init__(side_length, (side_length * (3 ** 0.5)) / 2)
+        self.side_length = side_length
+        self.parent_name = super().display_info()
+
+    def display_info(self):
+        return f"{super().display_info()}, Side Length: {self.side_length}"
+
+    def perimeter(self):
+        try:
+            return 3 * self.side_length
+        except AttributeError as e:
+            raise AttributeError(f"EquilateralTriangle perimeter calculation error: {e}")
+    
+
+class Rectangle(Quadrilateral):
+    def __init__(self, length, width):
+        super().__init__(length, width)
+        self.diagonal = (length ** 2 + width ** 2) ** 0.5
+        self.parent_name = super().display_info()
+
+    def display_info(self):
+        return f"{super().display_info()}, Diagonal: {self.diagonal}"
+
+    def perimeter(self):
+        try:
+            return 2 * (self.length + self.width)
+        except AttributeError as e:
+            raise AttributeError(f"Rectangle perimeter calculation error: {e}")
+    
+equilateral_triangle = EquilateralTriangle(5)
+rectangle = Rectangle(4, 6)
+
+
+print("\n**output of second question**\n")
+print(f"Attribute of Equilateral Triangle (side_length): {equilateral_triangle.side_length}")
+print(equilateral_triangle.display_info())
+print(f"Area of Equilateral Triangle: {equilateral_triangle.area()}")
+print(f"Perimeter of Equilateral Triangle: {equilateral_triangle.perimeter()}")
+
+print("*********************************\n")
+
+print(f"Attribute of Rectangle (diagonal): {rectangle.diagonal}")
+print(rectangle.display_info())
+print(f"Area of Rectangle: {rectangle.area()}")
+print(f"Perimeter of Rectangle: {rectangle.perimeter()}")
