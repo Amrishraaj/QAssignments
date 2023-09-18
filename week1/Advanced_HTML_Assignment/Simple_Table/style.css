@@ -1,0 +1,46 @@
+*{
+  padding:0;
+  margin:0;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 1000px;
+  flex-direction: column;
+  margin: 10% auto;
+  background-color: #eee;
+}
+
+h1{
+  color:rgb(3, 44, 82);
+  margin-bottom: 3%;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr, td {
+  border: 1px solid rgb(170, 170, 170);
+  padding: 8px;
+}
+
+th{
+  background-color: rgb(2, 28, 52);
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+
+tr:nth-child(3),
+tr:nth-child(5) {
+  background-color: #d1d1d1;
+}
+
+
+table{
+  box-shadow: 1px 1px 5px 1px grey;
+}

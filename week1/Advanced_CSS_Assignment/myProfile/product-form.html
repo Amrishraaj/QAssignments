@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <link rel="stylesheet" href="styles/navBar.css">
+  <link rel="stylesheet" href="styles/product-form.css">
+</head>
+<body>
+
+  <nav class="navigation-bar">
+    <ul>
+      <li id="home"><a href="index.html">Home</a></li>
+      <li id="about-me"><a href="about.html">About me</a></li>
+      <li id="product"><a href="product-form.html">Product</a></li>
+      <li id="game-zone"><a href="game-zone.html">Game Zone</a></li>
+    </ul>
+  </nav>
+  <form>
+    <h1>Product Form</h1>
+    <div class="input-area">
+      <label for="name">PRODUCT NAME</label>
+      <input type="text" id="name"/>
+
+      <label for="unit">UNIT OF MEASUREMENT</label>
+      <input type="text" id="unit"/>
+      
+      <label for="price">PRICE</label>
+      <input type="text" id="price"/>
+
+      <label for="description" >DESCRIPTION</label>
+      <textarea name="description" id="description" cols="30" rows="3"></textarea>
+    </div>
+    <div class="button-area">
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </div>
+  </form>
+
+  
+  <script src="script/navBar.js"></script>
+  <script src="script/product-form.js"></script>
+</body>
+</html>
